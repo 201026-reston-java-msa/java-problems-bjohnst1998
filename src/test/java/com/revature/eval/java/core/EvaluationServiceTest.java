@@ -154,7 +154,7 @@ public class EvaluationServiceTest {
 	}
 
 	/*******************************************************************
-	 * Question 5
+	 * Question 5 complete
 	 ******************************************************************/
 	@Test
 	public void cleansTheNumber() {
@@ -192,7 +192,7 @@ public class EvaluationServiceTest {
 	}
 
 	/*******************************************************************
-	 * Question 6
+	 * Question 6 complete
 	 ******************************************************************/
 	@Test
 	public void countOneWord() {

@@ -176,15 +176,12 @@ public class EvaluationService {
 	public int getScrabbleScore(String string) {
 		// TODO Write an implementation for this method declaration
 		string = string.toLowerCase();
-		HashMap<Character,Integer> values = ScabbleValues.getScrabbleValues();
-		int pointTotal=0;
-		for(int i =0; i <string.length();i++)
-		{
+		HashMap<Character, Integer> values = ScabbleValues.getScrabbleValues();
+		int pointTotal = 0;
+		for (int i = 0; i < string.length(); i++) {
 			pointTotal += values.get(string.charAt(i));
 		}
-		
-		
-		
+
 		return pointTotal;
 	}
 
@@ -219,9 +216,23 @@ public class EvaluationService {
 	 * Note: As this exercise only deals with telephone numbers used in
 	 * NANP-countries, only 1 is considered a valid country code.
 	 */
-	public String cleanPhoneNumber(String string) {
+	public String cleanPhoneNumber(String string) throws IllegalArgumentException {
 		// TODO Write an implementation for this method declaration
-		return null;
+		String finalNumber = new String();
+		StringBuilder sb = new StringBuilder();
+
+		for (int i = 0; i < string.length(); i++) {
+			if (Character.isDigit(string.charAt(i))) {
+				sb.append(string.charAt(i));
+			}
+		}
+		if (sb.length() == 10) {
+			return sb.toString();
+
+		} else {
+			throw new IllegalArgumentException();
+		}
+
 	}
 
 	/**
@@ -235,7 +246,54 @@ public class EvaluationService {
 	 */
 	public Map<String, Integer> wordCount(String string) {
 		// TODO Write an implementation for this method declaration
-		return null;
+		List<String> words = new ArrayList<>();
+		String currWord = new String();
+		List<Character> chars = new ArrayList<>();
+		for (int i = 0; i < string.length(); i++) 
+		{
+			if (string.charAt(i) == ' ' || i == string.length() - 1 || !Character.isLetter(string.charAt(i))) {
+				// Create new word
+				if(i == string.length() - 1)
+				{
+					chars.add(string.charAt(i));
+
+				}
+				if (chars.size() > 0) {
+					char[] temp = new char[chars.size()];
+					for(int j = 0; j<chars.size();j++)
+					{
+						temp[j] = Character.valueOf(chars.get(j));
+					}
+					currWord = String.copyValueOf(temp);					
+					words.add(currWord);
+					System.out.println(currWord);
+					chars.clear();
+				}
+
+			} else {
+				chars.add(string.charAt(i));
+			}
+
+		}
+		Map<String, Integer> wordsCounter = new HashMap<>();
+		for(int i = 0; i <words.size();i++)
+		{
+			int countOfWord = 0;
+
+			for(int j = 0; j<words.size();j++)
+			{
+				if(words.get(i).equals(words.get(j)))
+				{
+					countOfWord++;
+				}
+			}
+			
+			wordsCounter.put(words.get(i), countOfWord);
+			
+		}
+		
+		return wordsCounter;
+
 	}
 
 	/**
