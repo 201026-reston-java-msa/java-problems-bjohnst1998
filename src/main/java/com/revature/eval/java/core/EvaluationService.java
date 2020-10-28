@@ -249,22 +249,19 @@ public class EvaluationService {
 		List<String> words = new ArrayList<>();
 		String currWord = new String();
 		List<Character> chars = new ArrayList<>();
-		for (int i = 0; i < string.length(); i++) 
-		{
+		for (int i = 0; i < string.length(); i++) {
 			if (string.charAt(i) == ' ' || i == string.length() - 1 || !Character.isLetter(string.charAt(i))) {
 				// Create new word
-				if(i == string.length() - 1)
-				{
+				if (i == string.length() - 1) {
 					chars.add(string.charAt(i));
 
 				}
 				if (chars.size() > 0) {
 					char[] temp = new char[chars.size()];
-					for(int j = 0; j<chars.size();j++)
-					{
+					for (int j = 0; j < chars.size(); j++) {
 						temp[j] = Character.valueOf(chars.get(j));
 					}
-					currWord = String.copyValueOf(temp);					
+					currWord = String.copyValueOf(temp);
 					words.add(currWord);
 					System.out.println(currWord);
 					chars.clear();
@@ -276,22 +273,19 @@ public class EvaluationService {
 
 		}
 		Map<String, Integer> wordsCounter = new HashMap<>();
-		for(int i = 0; i <words.size();i++)
-		{
+		for (int i = 0; i < words.size(); i++) {
 			int countOfWord = 0;
 
-			for(int j = 0; j<words.size();j++)
-			{
-				if(words.get(i).equals(words.get(j)))
-				{
+			for (int j = 0; j < words.size(); j++) {
+				if (words.get(i).equals(words.get(j))) {
 					countOfWord++;
 				}
 			}
-			
+
 			wordsCounter.put(words.get(i), countOfWord);
-			
+
 		}
-		
+
 		return wordsCounter;
 
 	}
@@ -439,6 +433,10 @@ public class EvaluationService {
 	 */
 	static class RotationalCipher {
 		private int key;
+		char[] lowerCase = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
+				's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
+		char[] upperCase = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
+				'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
 
 		public RotationalCipher(int key) {
 			super();
@@ -447,7 +445,44 @@ public class EvaluationService {
 
 		public String rotate(String string) {
 			// TODO Write an implementation for this method declaration
-			return null;
+			StringBuilder sb = new StringBuilder();
+			for (int i = 0; i < string.length(); i++) {
+				// Check if character is letter
+				if (Character.isLetter(string.charAt(i))) {
+					// Find out if it's uppercase or not
+					if (Character.isUpperCase(string.charAt(i))) {
+						for (int j = 0; j < upperCase.length; j++) {
+							if (string.charAt(i) == upperCase[j]) {
+								if (j + key < upperCase.length) {
+									sb.append(upperCase[j + key]);
+
+								} else {
+									int newIndex = (j + key) - upperCase.length;
+									sb.append(upperCase[newIndex]);
+								}
+							}
+						}
+					} else {
+						for (int j = 0; j < lowerCase.length; j++) {
+							if (string.charAt(i) == lowerCase[j]) {
+								if (j + key < lowerCase.length) {
+									sb.append(lowerCase[j + key]);
+
+								} else {
+									int newIndex = (j + key) - lowerCase.length;
+									sb.append(lowerCase[newIndex]);
+								}
+							}
+						}
+					}
+
+				}
+				else {
+					sb.append(string.charAt(i));
+				}
+			}
+
+			return sb.toString();
 		}
 
 	}
