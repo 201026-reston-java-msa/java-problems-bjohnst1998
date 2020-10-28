@@ -27,7 +27,7 @@ public class EvaluationServiceTest {
 	public ExpectedException expectedException = ExpectedException.none();
 
 	/*******************************************************************
-	 * Question 1
+	 * Question 1 Complete
 	 ******************************************************************/
 	@Test
 	public void testAnEmptyString() {
@@ -55,7 +55,7 @@ public class EvaluationServiceTest {
 	}
 
 	/*******************************************************************
-	 * Question 2
+	 * Question 2 Complete
 	 ******************************************************************/
 	@Test
 	public void basic() {
@@ -86,7 +86,7 @@ public class EvaluationServiceTest {
 	}
 
 	/*******************************************************************
-	 * Question 3
+	 * Question 3 complete
 	 ******************************************************************/
 
 	@Test
@@ -126,7 +126,7 @@ public class EvaluationServiceTest {
 	}
 
 	/*******************************************************************
-	 * Question 4
+	 * Question 4 complete
 	 ******************************************************************/
 	@Test
 	public void testAValuableLetter() {

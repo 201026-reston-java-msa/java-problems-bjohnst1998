@@ -1,6 +1,8 @@
 package com.revature.eval.java.core;
 
 import java.time.temporal.Temporal;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,8 +16,16 @@ public class EvaluationService {
 	 * @return
 	 */
 	public String reverse(String string) {
-		
-		return "";
+
+		int sLength = string.length();
+		char[] reversedChar = new char[sLength];
+		int j = 0;
+		for (int i = sLength - 1; i >= 0; i--) {
+			reversedChar[j] = string.charAt(i);
+			j++;
+		}
+		String s = String.copyValueOf(reversedChar);
+		return s;
 	}
 
 	/**
@@ -28,7 +38,34 @@ public class EvaluationService {
 	 */
 	public String acronym(String phrase) {
 		// TODO Write an implementation for this method declaration
-		return null;
+		List<String> words = new ArrayList<>();
+		String currWord = new String();
+		List<Character> chars = new ArrayList<>();
+		for (int i = 0; i < phrase.length(); i++) {
+			if (phrase.charAt(i) == ' ' || i == phrase.length() - 1 || !Character.isLetterOrDigit(phrase.charAt(i))) {
+				// Create new word
+				if (chars.size() > 0) {
+					char newChar = chars.get(0);
+					currWord = String.valueOf(newChar);
+					currWord = currWord.toUpperCase();
+					words.add(currWord);
+					System.out.println(currWord);
+					chars.clear();
+				}
+
+			} else {
+				chars.add(phrase.charAt(i));
+			}
+
+		}
+		String returnS = "";
+
+		for (int i = 0; i < words.size(); i++) {
+			returnS = returnS.concat(words.get(i));
+			System.out.println(returnS);
+		}
+
+		return returnS;
 	}
 
 	/**
@@ -82,17 +119,41 @@ public class EvaluationService {
 
 		public boolean isEquilateral() {
 			// TODO Write an implementation for this method declaration
-			return false;
+			if (getSideOne() == getSideTwo() && getSideOne() == getSideThree()) {
+				return true;
+			} else {
+				return false;
+
+			}
 		}
 
 		public boolean isIsosceles() {
 			// TODO Write an implementation for this method declaration
-			return false;
+			double x = getSideOne();
+			double y = getSideTwo();
+			double z = getSideThree();
+
+			if (x == y && x != z && y != z || y == z && y != x && x != z || z == x && x != y && y != x) {
+				return true;
+			} else {
+				return false;
+
+			}
+
 		}
 
 		public boolean isScalene() {
 			// TODO Write an implementation for this method declaration
-			return false;
+			double x = getSideOne();
+			double y = getSideTwo();
+			double z = getSideThree();
+
+			if (x != y && x != z && y != z) {
+				return true;
+			} else {
+				return false;
+			}
+
 		}
 
 	}
@@ -114,7 +175,17 @@ public class EvaluationService {
 	 */
 	public int getScrabbleScore(String string) {
 		// TODO Write an implementation for this method declaration
-		return 0;
+		string = string.toLowerCase();
+		HashMap<Character,Integer> values = ScabbleValues.getScrabbleValues();
+		int pointTotal=0;
+		for(int i =0; i <string.length();i++)
+		{
+			pointTotal += values.get(string.charAt(i));
+		}
+		
+		
+		
+		return pointTotal;
 	}
 
 	/**
